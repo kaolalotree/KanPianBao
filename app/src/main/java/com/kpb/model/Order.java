@@ -23,6 +23,10 @@ public class Order {
 
     private String hall;
 
+    private Double price;
+
+    private String token;
+
     public Integer getOrderId() {
         return orderId;
     }
@@ -101,5 +105,17 @@ public class Order {
 
     public void setHall(String hall) {
         this.hall = hall;
+    }
+
+    public Double getPrice(){return price;}
+
+    public void setPrice(Double price){this.price=price;}
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
