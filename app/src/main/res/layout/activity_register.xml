@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:stretchColumns="2"
+    android:padding="10dp"
+    android:gravity="center"
+    tools:context=".RegisterActivity">
+    <TableRow
+        android:padding="5dp" >
+        <TextView
+            android:text="@string/account_text"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#000" />
+        <EditText
+            android:id="@+id/account"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:hint="手机号" />
+    </TableRow>
+    <TableRow
+        android:padding="5dp" >
+        <TextView
+            android:text="@string/password_text"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#000" />
+        <EditText
+            android:id="@+id/password"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="#000"
+            android:hint="密码" />
+    </TableRow>
+    <TableRow
+        android:padding="5dp" >
+        <TextView
+            android:text="@string/psd_ag_text"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#000" />
+        <EditText
+            android:id="@+id/psd_ag"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="#000"
+            android:hint="再次输入密码" />
+    </TableRow>
+    <TableRow
+        android:padding="5dp" >
+        <TextView
+            android:text="@string/bank_text"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#000" />
+        <EditText
+            android:id="@+id/bank_num"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:hint="银行卡号" />
+    </TableRow>
+    <TableRow
+        android:padding="5dp" >
+        <TextView
+            android:text="@string/val_date"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#000" />
+        <Spinner
+            android:id="@+id/spin_year"
+            android:layout_height="wrap_content"
+            android:hint="年份" />
+        <Spinner
+            android:id="@+id/spin_month"
+            android:layout_height="wrap_content"
+            android:hint="月份" />
+    </TableRow>
+    <TableRow
+        android:padding="5dp" >
+        <Button
+            android:id="@+id/res_button"
+            android:layout_height="wrap_content"
+            android:layout_span="3"
+            android:text="@string/res_text"/>
+    </TableRow>
+</TableLayout>

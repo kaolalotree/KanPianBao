@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">看片宝</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="border_top">Border Top</string>
+    <string name="border_bottom">Border Bottom</string>
+    <string name="image_url">Image Url</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="title_activity_movie_detail">MovieDetailActivity</string>
+    <string name="fptext">看片首页</string>
+    <string name="rctext">今日推荐</string>
+    <string name="ustext">个人中心</string>
+    <string name="title_activity_comment">评论</string>
+    <string name="title_activity_login">登录</string>
+
+
+
+
+    <string name="account_text">账　号</string>
+    <string name="password_text">密　码</string>
+    <string name="login_text">登　录</string>
+    <string name="res_text">注　册</string>
+    <string name="psd_ag_text">确认密码</string>
+    <string name="bank_text">银行卡号</string>
+    <string name="val_date">有效日期</string>
+    <string name="title_activity_register">注册</string>
+    <string name="title_activity_favorite">收藏</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_activity_order_list">订单管理</string>
+    <string name="title_activity_cinema_list">选择影院</string>
+    <string name="title_activity_screen_sche">ScreenScheActivity</string>
+    <string name="title_activity_seat">SeatActivity</string>
+
+
+
+    <string name="seat_title">选座购票</string>
+    <string name="seattable">座位表</string>
+    <string name="orderseat">选定</string>
+    <string name="cinema_address1">影院地址：黄龙体育场附近</string>
+    <string name="screen">观影荧屏</string>
+
+
+    <string name="test_intro">     《西游记之大圣归来》是根据中国传统神话故事进行拓展和演绎的3D动画电影，由高路动画、横店影视、十月动画、微影科技等联合出品，田晓鹏执导，张磊、林子杰、刘九容和童自荣等联袂配音。影片讲述了已于五行山下寂寞沉潜五百年的孙悟空被儿时的唐僧——俗名江流儿的小和尚误打误撞地解除了封印，在相互陪伴的冒险之旅中找回初心，完成自我救赎的故事。影片将于2015年7月10日以2D、3D、巨幕形式国内公映。</string>
+    <drawable name="clr_normal">#fff</drawable>
+    <drawable name="clr_pressed">#ffd1eeff</drawable>
+</resources>
