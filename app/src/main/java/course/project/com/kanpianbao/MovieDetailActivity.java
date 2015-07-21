@@ -3,8 +3,10 @@ package course.project.com.kanpianbao;
 
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
@@ -92,8 +94,9 @@ public class MovieDetailActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Map<String, String> params = new HashMap<String, String>();
-                //todo use share
-                params.put("userId", "1");
+                SharedPreferences sharedPreferences=getSharedPreferences("account", Context.MODE_PRIVATE);
+                int userId= sharedPreferences.getInt("userId",-1);
+                params.put("userId",String.valueOf(userId));
                 params.put("filmId",String.valueOf(film.getFilmId()));
                 addFavorite(params,mQueue);
             }

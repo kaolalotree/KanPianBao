@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,8 +56,9 @@ public class OrderListActivity extends Activity {
         setContentView(R.layout.activity_order_list);
         mQueue = Volley.newRequestQueue(getApplicationContext());
         Map<String, String> params = new HashMap<String, String>();
-        //todo use sharepreference
-        params.put("userId", "1");
+        SharedPreferences sharedPreferences=getSharedPreferences("account", Context.MODE_PRIVATE);
+        int userId= sharedPreferences.getInt("userId",-1);
+        params.put("userId",String.valueOf(userId));
         JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.POST, API.GET_ORDERS_URL, new JSONObject(params),
                 new Response.Listener<JSONObject>(){
                     @Override

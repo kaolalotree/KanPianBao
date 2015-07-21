@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -98,7 +99,7 @@ public class CommentActivity extends Activity {
     }
     private List<HashMap<String, Object>> getData() {
 
-        // ÐÂ½¨Ò»¸ö¼¯ºÏÀà£¬ÓÃÓÚ´æ·Å¶àÌõÊý¾Ý
+        // ï¿½Â½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£¬ï¿½ï¿½ï¿½Ú´ï¿½Å¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
         HashMap<String, Object> map = null;
         for (int i = 0; i <cmtList.size(); i++) {
@@ -117,9 +118,9 @@ public class CommentActivity extends Activity {
     public void cmtDialog(){
         final EditText inputServer = new EditText(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("ÊäÈëÆÀÂÛ").setIcon(android.R.drawable.ic_dialog_info).setView(inputServer)
-                .setNegativeButton("È¡Ïû", null);
-        builder.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+        builder.setTitle("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½").setIcon(android.R.drawable.ic_dialog_info).setView(inputServer)
+                .setNegativeButton("È¡ï¿½ï¿½", null);
+        builder.setPositiveButton("È·ï¿½ï¿½", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 String cmt=inputServer.getText().toString();
                 giveComment(cmt);
@@ -132,8 +133,10 @@ public class CommentActivity extends Activity {
         Map<String, String> params = new HashMap<String, String>();
         int filmId=getIntent().getIntExtra("filmId",-1);
         params.put("filmId", String.valueOf(filmId));
-        //todo use share
-        params.put("userId","1");
+
+        SharedPreferences sharedPreferences=getSharedPreferences("account", Context.MODE_PRIVATE);
+        int userId= sharedPreferences.getInt("userId",-1);
+        params.put("userId",String.valueOf(userId));
         params.put("comment",cmt);
         JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.POST, API.GIVE_COMMENT_URL, new JSONObject(params),
                 new Response.Listener<JSONObject>(){

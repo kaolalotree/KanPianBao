@@ -1,7 +1,9 @@
 package course.project.com.kanpianbao;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -89,7 +91,11 @@ public class LoginActivity extends Activity {
         try {
             boolean status= response.getBoolean("status");
             if(status){
-            //todo store preference
+
+                SharedPreferences sharedPreferences=getSharedPreferences("account", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putInt("userId",response.getInt("userId"));
+                editor.commit();
                 Intent register_intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(register_intent);
                 Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_LONG).show();

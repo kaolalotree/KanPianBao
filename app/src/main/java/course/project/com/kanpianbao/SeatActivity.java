@@ -2,7 +2,9 @@ package course.project.com.kanpianbao;
 
 import android.app.Activity;
 import android.app.Notification;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -263,7 +265,7 @@ public class SeatActivity extends Activity {
                 }
 
                 if(s.equals("")){
-                    Toast.makeText(getApplicationContext(), "ÖÁÉÙÒªÑ¡ÔñÒ»¸ö×ùÎ»Ó´", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "ï¿½ï¿½ï¿½ï¿½ÒªÑ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Î»Ó´", Toast.LENGTH_LONG).show();
                     return;
                 }
                 s=s.substring(0,s.length()-1);
@@ -271,8 +273,9 @@ public class SeatActivity extends Activity {
                 params.put("screenScheId", String.valueOf(screenScheId));
                 params.put("price",String.valueOf(price));
                 params.put("seat",s);
-                //todo modify it by sharepreference
-                params.put("userId", "1");
+                SharedPreferences sharedPreferences=getSharedPreferences("account", Context.MODE_PRIVATE);
+                int userId= sharedPreferences.getInt("userId",-1);
+                params.put("userId",String.valueOf(userId));
                 giveOrder(params);
 
             }

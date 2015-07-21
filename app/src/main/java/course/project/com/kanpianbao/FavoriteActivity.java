@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -64,9 +65,11 @@ public class FavoriteActivity extends Activity {
 
     }
     public void getFavorites(){
-        //todo use share
+
         Map<String, String> params = new HashMap<String, String>();
-        params.put("userId", "1");
+        SharedPreferences sharedPreferences=getSharedPreferences("account", Context.MODE_PRIVATE);
+        int userId= sharedPreferences.getInt("userId",-1);
+        params.put("userId",String.valueOf(userId));
         JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.POST, API.GET_FAVORITES_URL, new JSONObject(params),
                 new Response.Listener<JSONObject>(){
                     @Override
@@ -172,8 +175,9 @@ public class FavoriteActivity extends Activity {
                 Film item = movieList.get(position);
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("filmId", String.valueOf(item.getFilmId()));
-                //todo share prefer
-                params.put("userId", "1");
+                SharedPreferences sharedPreferences=getSharedPreferences("account", Context.MODE_PRIVATE);
+                int userId= sharedPreferences.getInt("userId",-1);
+                params.put("userId",String.valueOf(userId));
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, API.CANCEL_FAVORITE_URL, new JSONObject(params),
                         new Response.Listener<JSONObject>() {
                             @Override
