@@ -49,8 +49,6 @@ public class LoginActivity extends Activity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent login_intent = new Intent(LoginActivity.this, MainActivity.class);
-//                startActivity(login_intent);
                 login();
             }
         });
