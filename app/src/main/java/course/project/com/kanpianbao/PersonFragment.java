@@ -2,7 +2,9 @@ package course.project.com.kanpianbao;
 
 import android.app.Activity;
 import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -56,6 +59,13 @@ public class PersonFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //todo log out
+                SharedPreferences sharedPreferences=getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.clear();
+                editor.commit();
+                Toast.makeText(getActivity(),"注销成功" , Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(getActivity(),LoginActivity.class);
+                startActivity(intent);
             }
         });
 

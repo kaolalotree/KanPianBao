@@ -37,6 +37,13 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        SharedPreferences sharedPreferences=getSharedPreferences("account", Context.MODE_PRIVATE);
+        if(sharedPreferences.contains("userId")){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            this.finish();
+        }
+
         mQueue = Volley.newRequestQueue(getApplicationContext());
         final Button login = (Button) findViewById(R.id.login_button);
         login.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +106,7 @@ public class LoginActivity extends Activity {
                 Intent register_intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(register_intent);
                 Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_LONG).show();
+                this.finish();
             }
             else
                 Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_LONG).show();

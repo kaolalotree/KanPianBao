@@ -50,98 +50,63 @@ import java.util.Set;
 
 public class MyScrollView extends ScrollView implements View.OnTouchListener {
 
-    /**
-     * ÿҳҪ���ص�ͼƬ����
-     */
+
     public static final int PAGE_SIZE = 15;
 
-    /**
-     * ��¼��ǰ�Ѽ��ص��ڼ�ҳ
-     */
+
     private int page;
 
-    /**
-     * ÿһ�еĿ��
-     */
     private int columnWidth;
 
-    /**
-     * ��ǰ��һ�еĸ߶�
-     */
+
     private int firstColumnHeight;
 
-    /**
-     * ��ǰ�ڶ��еĸ߶�
-     */
+
     private int secondColumnHeight;
 
-    /**
-     * ��ǰ�����еĸ߶�
-     */
+
  //   private int thirdColumnHeight;
 
-    /**
-     * �Ƿ��Ѽ��ع�һ��layout������onLayout�еĳ�ʼ��ֻ�����һ��
-     */
+
     private boolean loadOnce;
 
-    /**
-     * ��ͼƬ���й���Ĺ�����
-     */
+
     private ImageLoader imageLoader;
 
-    /**
-     * ��һ�еĲ���
-     */
+
     private LinearLayout firstColumn;
 
-    /**
-     * �ڶ��еĲ���
-     */
+
     private LinearLayout secondColumn;
 
-    /**
-     * �����еĲ���
-     */
+
     private LinearLayout thirdColumn;
 
-    /**
-     * ��¼�����������ػ�ȴ����ص�����
-     */
+
     private static Set<LoadImageTask> taskCollection;
 
-    /**
-     * MyScrollView�µ�ֱ���Ӳ��֡�
-     */
+
     private static View scrollLayout;
 
-    /**
-     * MyScrollView���ֵĸ߶ȡ�
-     */
+
     private static int scrollViewHeight;
 
-    /**
-     * ��¼�ϴ�ֱ����Ĺ������롣
-     */
+
     private static int lastScrollY = -1;
 
-    /**
-     * ��¼���н����ϵ�ͼƬ�����Կ�����ʱ���ƶ�ͼƬ���ͷš�
-     */
+
     private List<ImageView> imageViewList = new ArrayList<ImageView>();
     private List<TextView>  introViewList =new ArrayList<TextView>();
 
-    /**
-     * ��Handler�н���ͼƬ�ɼ��Լ����жϣ��Լ����ظ��ͼƬ�Ĳ�����
-     */
+
     private static Handler handler = new Handler() {
 
         public void handleMessage(android.os.Message msg) {
             MyScrollView myScrollView = (MyScrollView) msg.obj;
             int scrollY = myScrollView.getScrollY();
-            // ���ǰ�Ĺ���λ�ú��ϴ���ͬ����ʾ��ֹͣ����
+
             if (scrollY == lastScrollY) {
-                // ����������ײ������ҵ�ǰû���������ص�����ʱ����ʼ������һҳ��ͼƬ
+
                 if (scrollViewHeight + scrollY >= scrollLayout.getHeight()
                         && taskCollection.isEmpty()) {
                     myScrollView.loadMoreImages();
@@ -151,19 +116,14 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
                 lastScrollY = scrollY;
                 Message message = new Message();
                 message.obj = myScrollView;
-                // 5������ٴζԹ���λ�ý����ж�
+
                 handler.sendMessageDelayed(message, 5);
             }
         };
 
     };
 
-    /**
-     * MyScrollView�Ĺ��캯��
-     *
-     * @param context
-     * @param attrs
-     */
+
     private  RequestQueue mQueue;
     public MyScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -199,9 +159,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
         recommendMovies= JSON.parseArray(response.toString(), Film.class);
     }
 
-    /**
-     * ����һЩ�ؼ��Եĳ�ʼ����������ȡMyScrollView�ĸ߶ȣ��Լ��õ���һ�еĿ��ֵ���������￪ʼ���ص�һҳ��ͼƬ��
-     */
+
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
@@ -217,9 +175,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
         }
     }
 
-    /**
-     * �����û��Ĵ����¼�������û���ָ�뿪��Ļ��ʼ���й�����⡣
-     */
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -230,9 +186,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
         return false;
     }
 
-    /**
-     * ��ʼ������һҳ��ͼƬ��ÿ��ͼƬ���Ὺ��һ���첽�߳�ȥ���ء�
-     */
+
     public void loadMoreImages() {
         ArrayList<String> imageUrls=new ArrayList<String>();
         for(Film film:recommendMovies)
@@ -261,9 +215,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
         }
     }
 
-    /**
-     * ����imageViewList�е�ÿ��ͼƬ����ͼƬ�Ŀɼ��Խ��м�飬���ͼƬ�Ѿ��뿪��Ļ�ɼ�Χ����ͼƬ�滻��һ�ſ�ͼ��
-     */
+
     public void checkVisibility() {
         for (int i = 0; i < imageViewList.size(); i++) {
             ImageView imageView = imageViewList.get(i);
@@ -286,41 +238,25 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
         }
     }
 
-    /**
-     * �ж��ֻ��Ƿ���SD����
-     *
-     * @return ��SD������true��û�з���false��
-     */
+
     private boolean hasSDCard() {
         return Environment.MEDIA_MOUNTED.equals(Environment
                 .getExternalStorageState());
     }
 
-    /**
-     * �첽����ͼƬ������
-     *
-     * @author guolin
-     */
+
     class LoadImageTask extends AsyncTask<String, Void, Bitmap> {
 
-        /**
-         * ͼƬ��URL��ַ
-         */
+
         private String mImageUrl;
 
-        /**
-         * ���ظ�ʹ�õ�ImageView
-         */
+
         private ImageView mImageView;
 
         public LoadImageTask() {
         }
 
-        /**
-         * �����ظ�ʹ�õ�ImageView����
-         *
-         * @param imageView
-         */
+
         public LoadImageTask(ImageView imageView) {
             mImageView = imageView;
         }
@@ -346,13 +282,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
             taskCollection.remove(this);
         }
 
-        /**
-         * ��ݴ����URL����ͼƬ���м��ء��������ͼƬ�Ѿ�������SD���У���ֱ�Ӵ�SD�����ȡ������ʹ����������ء�
-         *
-         * @param imageUrl
-         *            ͼƬ��URL��ַ
-         * @return ���ص��ڴ��ͼƬ��
-         */
+
         private Bitmap loadImage(String imageUrl) {
             File imageFile = new File(getImagePath(imageUrl));
             if (!imageFile.exists()) {
@@ -369,16 +299,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
             return null;
         }
 
-        /**
-         * ��ImageView�����һ��ͼƬ
-         *
-         * @param bitmap
-         *            ����ӵ�ͼƬ
-         * @param imageWidth
-         *            ͼƬ�Ŀ��
-         * @param imageHeight
-         *            ͼƬ�ĸ߶�
-         */
+
         private void addImage(Bitmap bitmap, int imageWidth, int imageHeight) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     imageWidth, imageHeight);
@@ -431,13 +352,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
             }
         }
 
-        /**
-         * �ҵ���ʱӦ�����ͼƬ��һ�С���ǰ�߶���С��һ�о���Ӧ����ӵ�һ�С�
-         *
-         * @param imageView
-         * @param imageHeight
-         * @return Ӧ�����ͼƬ��һ��
-         */
+
         private LinearLayout findColumnToAdd(ImageView imageView,
                                              int imageHeight) {
             if(firstColumnHeight<=secondColumnHeight){
@@ -454,12 +369,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
             }
         }
 
-        /**
-         * ��ͼƬ���ص�SD������������
-         *
-         * @param imageUrl
-         *            ͼƬ��URL��ַ��
-         */
+
         private void downloadImage(String imageUrl) {
             HttpURLConnection con = null;
             FileOutputStream fos = null;
@@ -509,13 +419,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
             }
         }
 
-        /**
-         * ��ȡͼƬ�ı��ش洢·����
-         *
-         * @param imageUrl
-         *            ͼƬ��URL��ַ��
-         * @return ͼƬ�ı��ش洢·����
-         */
+
         private String getImagePath(String imageUrl) {
             int lastSlashIndex = imageUrl.lastIndexOf("/");
             String imageName = imageUrl.substring(lastSlashIndex + 1);

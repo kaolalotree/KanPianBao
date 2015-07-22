@@ -1,6 +1,9 @@
 package course.project.com.kanpianbao;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -45,6 +48,27 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         fManager = getSupportFragmentManager();
         initViews();
         setChioceItem(0);
+        SharedPreferences sharedPreferences=getSharedPreferences("account", Context.MODE_PRIVATE);
+        if(!sharedPreferences.contains("userId")){
+            Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences=getSharedPreferences("account", Context.MODE_PRIVATE);
+        if(!sharedPreferences.contains("userId")){
+            Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+    public void onPause(){
+        super.onPause();
+        SharedPreferences sharedPreferences=getSharedPreferences("account", Context.MODE_PRIVATE);
+        if(!sharedPreferences.contains("userId")){
+            Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void initViews()
@@ -63,7 +87,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         user_layout.setOnClickListener(this);
     }
 
-    //ÖØÐ´onClickÊÂ¼þ
+    //ï¿½ï¿½Ð´onClickï¿½Â¼ï¿½
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
