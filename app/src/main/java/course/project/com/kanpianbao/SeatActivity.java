@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -33,6 +34,7 @@ import com.kpb.model.ScreenSche;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.Externalizable;
 import java.util.HashMap;
@@ -265,12 +267,13 @@ public class SeatActivity extends Activity {
                 }
 
                 if(s.equals("")){
-                    Toast.makeText(getApplicationContext(), "����Ҫѡ��һ����λӴ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "至少选一个座奥", Toast.LENGTH_LONG).show();
                     return;
                 }
                 s=s.substring(0,s.length()-1);
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("screenScheId", String.valueOf(screenScheId));
+                //todo ???
                 params.put("price",String.valueOf(price));
                 params.put("seat",s);
                 SharedPreferences sharedPreferences=getSharedPreferences("account", Context.MODE_PRIVATE);
@@ -314,19 +317,40 @@ public class SeatActivity extends Activity {
             e.printStackTrace();
         }
     }
-
+    private int seatNum=0;
+    public void setSeat(){
+        String result="";
+        for(int i=0;i<612;i++) {
+            if(seat[i]==1) {
+                int col= i%100;
+                int row = i/100;
+                result+=row+"排"+col+"座 ";
+            }
+        }
+        TextView tx=(TextView)findViewById(R.id.orderseatposition);
+        TextView tx2=(TextView)findViewById(R.id.orderprice);
+        double p=getIntent().getDoubleExtra("price",-1.00);
+        tx.setText(result);
+        tx2.setText(p*seatNum+"元");
+    }
     public void orderseat(final CheckBox seatposition ,int a) {
         final int b = a;
         final CheckBox position = seatposition;
         position.setOnClickListener(new CheckBox.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (position.isChecked()) {
-                    seat[b] = 1;
-                } else {
-                    seat[b] = 0;
+
+
+                    if (position.isChecked()) {
+                        seatNum++;
+                        seat[b] = 1;
+                    } else {
+                        seatNum--;
+                        seat[b] = 0;
+                    }
+                    setSeat();
                 }
-            }
+
         });
     }
 

@@ -48,11 +48,11 @@ public class OrderDetailActivity extends Activity {
     public void initNFC(){
         mAdapter = NfcAdapter.getDefaultAdapter(this);
         if ( mAdapter == null) {
-            Toast.makeText(getApplicationContext(), "设备不支持NFC!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "璁惧涓嶆敮鎸丯FC", Toast.LENGTH_LONG).show();
             return;
         }
         if ( mAdapter!=null&&! mAdapter.isEnabled()) {
-            Toast.makeText(getApplicationContext(), "请在系统设置中先启用NFC功能!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "璇峰湪绯荤粺璁剧疆涓惎鐢∟FC", Toast.LENGTH_LONG).show();
             return;
         }
         hasNFC=true;
@@ -63,7 +63,6 @@ public class OrderDetailActivity extends Activity {
         IntentFilter ndef= new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
         ndef.addCategory("*/*");
         intentFilters = new IntentFilter[]{ndef};
-        //创建一个 PendingIntent 对象, 这样Android系统就能在一个tag被检测到时定位到这个对象
         pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,
                 getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
     }
@@ -72,7 +71,7 @@ public class OrderDetailActivity extends Activity {
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         Log.d("OrderStatus",currentOrder.getStatus());
         if(currentOrder.getStatus().equals("y"))
-            Toast.makeText(getApplicationContext(), "该订单已经付过款了奥", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "璇ヨ鍗曞凡缁忎粯杩囨浜嗗ゥ", Toast.LENGTH_LONG).show();
         else
             PayByNFC();
         return;
@@ -102,10 +101,10 @@ public class OrderDetailActivity extends Activity {
                                 ImageView status=(ImageView)findViewById(R.id.order_status);
                                 currentOrder.setStatus("y");
                                 status.setImageResource(R.drawable.payed);
-                                Toast.makeText(getApplicationContext(), "付款成功", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "浠樻鎴愬姛", Toast.LENGTH_LONG).show();
                             }
                             else
-                                Toast.makeText(getApplicationContext(), "付款失败", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "浠樻澶辫触", Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -171,7 +170,7 @@ public class OrderDetailActivity extends Activity {
         Date date=order.getScreenTime();
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
         time.setText(sdf.format(date));
-        hall.setText(order.getHall()+"号厅");
+        hall.setText(order.getHall()+"鍙峰巺");
         seat.setText(order.getSeat());
         if(order.getStatus().equals("y"))
             status.setImageResource(R.drawable.payed);

@@ -165,11 +165,11 @@ public class FavoriteActivity extends Activity {
     }
 
     public void del_alert(final int position){
-        new AlertDialog.Builder(this).setTitle("��ʾ").setMessage("ȷ��ɾ���ղأ�").setNegativeButton("ȡ��", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(this).setTitle("删除收藏").setMessage("是否取消收藏").setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
-        }).setPositiveButton("ȷ��", new DialogInterface.OnClickListener() {
+        }).setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Film item = movieList.get(position);

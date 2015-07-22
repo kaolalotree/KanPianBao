@@ -33,7 +33,7 @@ import java.util.Map;
 public class RegisterActivity extends Activity {
     private RequestQueue mQueue;
     private static String[] year = { "2015", "2016", "2017", "2018", "2019" };
-    private static String[] month = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
+    private static String[] month = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "n10", "n11", "12" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

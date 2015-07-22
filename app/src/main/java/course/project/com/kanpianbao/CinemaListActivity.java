@@ -144,7 +144,7 @@ public class CinemaListActivity extends Activity {
             }
             loadImg(item.getCinemaImg(),holder.cinemaImage);
             holder.cinemaName.setText(item.getCinemaName());
-            holder.cinemaIntro.setText(item.getCinemaIntro());
+            holder.cinemaIntro.setText(item.getCinemaAddr());
             return view;
         }
         class ViewHolder {

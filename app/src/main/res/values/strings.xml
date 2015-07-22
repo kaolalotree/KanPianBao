@@ -44,4 +44,7 @@
     <string name="test_intro">     《西游记之大圣归来》是根据中国传统神话故事进行拓展和演绎的3D动画电影，由高路动画、横店影视、十月动画、微影科技等联合出品，田晓鹏执导，张磊、林子杰、刘九容和童自荣等联袂配音。影片讲述了已于五行山下寂寞沉潜五百年的孙悟空被儿时的唐僧——俗名江流儿的小和尚误打误撞地解除了封印，在相互陪伴的冒险之旅中找回初心，完成自我救赎的故事。影片将于2015年7月10日以2D、3D、巨幕形式国内公映。</string>
     <drawable name="clr_normal">#fff</drawable>
     <drawable name="clr_pressed">#ffd1eeff</drawable>
+
+    <drawable name="logout_btn_normal">#ffffa2d1</drawable>
+    <drawable name="logout_btn_pressed">#ffffd3f5</drawable>
 </resources>

@@ -99,7 +99,6 @@ public class CommentActivity extends Activity {
     }
     private List<HashMap<String, Object>> getData() {
 
-        // �½�һ�������࣬���ڴ�Ŷ�������
         ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
         HashMap<String, Object> map = null;
         for (int i = 0; i <cmtList.size(); i++) {
@@ -118,9 +117,9 @@ public class CommentActivity extends Activity {
     public void cmtDialog(){
         final EditText inputServer = new EditText(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("��������").setIcon(android.R.drawable.ic_dialog_info).setView(inputServer)
-                .setNegativeButton("ȡ��", null);
-        builder.setPositiveButton("ȷ��", new DialogInterface.OnClickListener() {
+        builder.setTitle("发表评论").setIcon(android.R.drawable.ic_dialog_info).setView(inputServer)
+                .setNegativeButton("取消", null);
+        builder.setPositiveButton("发表", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 String cmt=inputServer.getText().toString();
                 giveComment(cmt);

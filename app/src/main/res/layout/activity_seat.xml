@@ -28,17 +28,43 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:orientation="vertical">
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#2894FF"
-            android:text="@string/seattable"
-            android:textSize="22sp"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#2894FF"
+                android:text="@string/seattable"
+                android:textSize="22sp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选定总价:"
+                    android:textSize="22sp"
+                    android:textColor="#fa1523"/>
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/orderprice"
+                    android:textSize="22sp"
+                    android:text="0.0元"
+                    android:textColor="#fa1523"/>
+            </LinearLayout>
+
+        </LinearLayout>
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:background="#80FFFF" />
+
     </LinearLayout>
+
+
 
 
     <LinearLayout
@@ -603,7 +629,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="25dp"
+        android:paddingTop="15dp"
         android:gravity="center">
         <TextView
             android:layout_width="wrap_content"
@@ -613,6 +639,26 @@
             android:textColor="#fff"
             android:textSize="20sp"
             android:background="@drawable/screen"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:text="选定座位:"
+            android:textSize="20sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/orderseatposition"
+            android:text=""
+            android:textSize="20sp"/>
+
     </LinearLayout>
 
     <LinearLayout

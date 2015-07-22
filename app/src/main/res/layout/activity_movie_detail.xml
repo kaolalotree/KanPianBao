@@ -1,6 +1,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ScrollView"
+    android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
     <LinearLayout
@@ -32,7 +33,6 @@
             android:orientation="vertical">
 
             <ImageView
-                android:src="@drawable/user_head"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
                 android:id="@+id/moviePic"

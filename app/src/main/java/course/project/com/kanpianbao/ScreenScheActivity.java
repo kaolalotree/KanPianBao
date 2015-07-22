@@ -97,7 +97,6 @@ public class ScreenScheActivity extends Activity {
     public void parseJson(JSONObject response){
         try {
             JSONArray ja=response.getJSONArray("screensches");
-            Log.d("HEKK", ja.toString());
             screenlist= JSON.parseArray(ja.toString(), ScreenSche.class);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -120,6 +119,8 @@ public class ScreenScheActivity extends Activity {
         });
         mQueue.add(imageRequest);
     }
+   public final static int[] halls={R.drawable.n1,R.drawable.n2,R.drawable.n3,R.drawable.n4,R.drawable.n5,R.drawable.n6,R.drawable.n7,
+            R.drawable.n8,R.drawable.n9,R.drawable.n10,R.drawable.n11,R.drawable.n12};
     public class ScreenAdapter extends ArrayAdapter<ScreenSche> {
         private int resourceId;
 
@@ -129,6 +130,7 @@ public class ScreenScheActivity extends Activity {
             resourceId = textViewResourceId;
         }
         @Override
+
         public View getView(int position, View convertView, ViewGroup parent) {
             ScreenSche item = getItem(position);
             View view;
@@ -147,7 +149,8 @@ public class ScreenScheActivity extends Activity {
             }
 
          //   holder.screenImage.setImageResource(item.getScreen_image_num());
-            holder.screenName.setText(item.getHall());
+            holder.screenImage.setImageResource(halls[position]);
+            holder.screenName.setText(item.getHall()+"号厅");
             Date date=item.getTime();
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
             holder.screenTime.setText(sdf.format(date));

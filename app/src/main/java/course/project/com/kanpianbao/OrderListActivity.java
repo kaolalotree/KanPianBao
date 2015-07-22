@@ -84,7 +84,6 @@ public class OrderListActivity extends Activity {
     public void parseJson(JSONObject response){
         try {
             JSONArray ja=response.getJSONArray("orders");
-            Log.d("HEKK", ja.toString());
             orderList= JSON.parseArray(ja.toString(), Order.class);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -172,11 +171,11 @@ public class OrderListActivity extends Activity {
     }
 
     public void order_del_alert(final int position){
-        new AlertDialog.Builder(this).setTitle("È¡Ïû¶©µ¥").setMessage("È·¶¨È¡Ïû¶©µ¥Âğ").setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(this).setTitle("å–æ¶ˆè®¢å•").setMessage("ç¡®å®šå–æ¶ˆè®¢å•å—").setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
-        }).setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+        }).setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Order item = orderList.get(position);
@@ -210,8 +209,6 @@ public class OrderListActivity extends Activity {
             }
         }).show();
     }
-
-
 }
 
 

@@ -51,97 +51,97 @@ import java.util.Set;
 public class MyScrollView extends ScrollView implements View.OnTouchListener {
 
     /**
-     * ц©рЁр╙╪сть╣дм╪ф╛йЩа©
+     * ц©рЁр╙О©╫О©╫О©╫ь╣О©╫м╪ф╛О©╫О©╫О©╫О©╫
      */
     public static final int PAGE_SIZE = 15;
 
     /**
-     * ╪гб╪╣╠г╟ря╪сть╣╫╣з╪╦рЁ
+     * О©╫О©╫б╪О©╫О©╫г╟О©╫я╪О©╫О©╫ь╣О©╫О©╫з╪О©╫рЁ
      */
     private int page;
 
     /**
-     * ц©р╩ап╣д©М╤х
+     * ц©р╩О©╫п╣д©О©╫О©╫
      */
     private int columnWidth;
 
     /**
-     * ╣╠г╟╣зр╩ап╣д╦ъ╤х
+     * О©╫О©╫г╟О©╫О©╫р╩О©╫п╣д╦ъ╤О©╫
      */
     private int firstColumnHeight;
 
     /**
-     * ╣╠г╟╣з╤Чап╣д╦ъ╤х
+     * О©╫О©╫г╟О©╫з╤О©╫О©╫п╣д╦ъ╤О©╫
      */
     private int secondColumnHeight;
 
     /**
-     * ╣╠г╟╣зхЩап╣д╦ъ╤х
+     * О©╫О©╫г╟О©╫О©╫О©╫О©╫О©╫п╣д╦ъ╤О©╫
      */
  //   private int thirdColumnHeight;
 
     /**
-     * йг╥Яря╪сть╧Щр╩╢нlayoutё╛уБюОonLayoutжп╣дЁУй╪╩╞ж╩пХ╪стьр╩╢н
+     * О©╫г╥О©╫О©╫я╪О©╫О©╫ь╧О©╫р╩О©╫О©╫layoutО©╫О©╫О©╫О©╫О©╫О©╫onLayoutО©╫п╣дЁО©╫й╪О©╫О©╫ж╩О©╫О©╫О©╫О©╫О©╫р╩О©╫О©╫
      */
     private boolean loadOnce;
 
     /**
-     * ╤тм╪ф╛╫Ьпп╧эюМ╣д╧╓╬ъюЮ
+     * О©╫О©╫м╪ф╛О©╫О©╫О©╫п╧О©╫О©╫О©╫д╧О©╫О©╫О©╫О©╫О©╫
      */
     private ImageLoader imageLoader;
 
     /**
-     * ╣зр╩ап╣д╡╪╬ж
+     * О©╫О©╫р╩О©╫п╣д╡О©╫О©╫О©╫
      */
     private LinearLayout firstColumn;
 
     /**
-     * ╣з╤Чап╣д╡╪╬ж
+     * О©╫з╤О©╫О©╫п╣д╡О©╫О©╫О©╫
      */
     private LinearLayout secondColumn;
 
     /**
-     * ╣зхЩап╣д╡╪╬ж
+     * О©╫О©╫О©╫О©╫О©╫п╣д╡О©╫О©╫О©╫
      */
     private LinearLayout thirdColumn;
 
     /**
-     * ╪гб╪кЫспуЩтзобть╩Р╣х╢Щобть╣дхннЯ║ё
+     * О©╫О©╫б╪О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ь╩О©╫х╢О©╫О©╫О©╫О©╫ь╣О©╫О©╫О©╫О©╫О©╫
      */
     private static Set<LoadImageTask> taskCollection;
 
     /**
-     * MyScrollViewоб╣дж╠╫свс╡╪╬ж║ё
+     * MyScrollViewО©╫б╣О©╫ж╠О©╫О©╫О©╫с╡О©╫О©╫ж║О©╫
      */
     private static View scrollLayout;
 
     /**
-     * MyScrollView╡╪╬ж╣д╦ъ╤х║ё
+     * MyScrollViewО©╫О©╫О©╫ж╣д╦ъ╤х║О©╫
      */
     private static int scrollViewHeight;
 
     /**
-     * ╪гб╪ио╢╧ж╠╥╫оР╣д╧Ж╤╞╬ЮюК║ё
+     * О©╫О©╫б╪О©╫о╢О©╫ж╠О©╫О©╫О©╫О©╫д╧О©╫О©╫О©╫О©╫О©╫О©╫К║ё
      */
     private static int lastScrollY = -1;
 
     /**
-     * ╪гб╪кЫсп╫ГцФио╣дм╪ф╛ё╛сцрт©ирткФй╠©ьжф╤тм╪ф╛╣дйм╥е║ё
+     * О©╫О©╫б╪О©╫О©╫О©╫п╫О©╫О©╫О©╫О©╫о╣О©╫м╪ф╛О©╫О©╫О©╫О©╫О©╫т©О©╫О©╫О©╫О©╫О©╫й╠О©╫О©╫О©╫ф╤О©╫м╪ф╛О©╫О©╫О©╫м╥е║О©╫
      */
     private List<ImageView> imageViewList = new ArrayList<ImageView>();
     private List<TextView>  introViewList =new ArrayList<TextView>();
 
     /**
-     * тзHandlerжп╫Ьппм╪ф╛©и╪Шпт╪Л╡И╣деп╤оё╛рт╪╟╪сть╦Э╤Юм╪ф╛╣д╡ывВ║ё
+     * О©╫О©╫HandlerО©╫п╫О©╫О©╫О©╫м╪ф╛О©╫и╪О©╫О©╫т╪О©╫О©╫О©╫О©╫п╤оёО©╫О©╫т╪О©╫О©╫О©╫О©╫ь╦О©╫О©╫м╪ф╛О©╫д╡О©╫О©╫О©╫О©╫О©╫
      */
     private static Handler handler = new Handler() {
 
         public void handleMessage(android.os.Message msg) {
             MyScrollView myScrollView = (MyScrollView) msg.obj;
             int scrollY = myScrollView.getScrollY();
-            // хГ╧Ш╣╠г╟╣д╧Ж╤╞н╩жц╨мио╢ноЮм╛ё╛╠Мй╬рямёж╧╧Ж╤╞
+            // О©╫О©╫О©╫г╟О©╫д╧О©╫О©╫О©╫н╩О©╫ц╨О©╫О©╫о╢О©╫О©╫О©╫м╛О©╫О©╫О©╫О©╫й╬О©╫О©╫мёж╧О©╫О©╫О©╫О©╫
             if (scrollY == lastScrollY) {
-                // ╣╠╧Ж╤╞╣двН╣в╡©ё╛╡╒гр╣╠г╟ц╩спуЩтзобть╣дхннЯй╠ё╛©╙й╪╪стьобр╩рЁ╣дм╪ф╛
+                // О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫в╡О©╫О©╫О©╫О©╫О©╫О©╫р╣О©╫г╟ц╩О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ь╣О©╫О©╫О©╫О©╫О©╫й╠О©╫О©╫О©╫О©╫й╪О©╫О©╫О©╫О©╫О©╫О©╫р╩рЁО©╫О©╫м╪ф╛
                 if (scrollViewHeight + scrollY >= scrollLayout.getHeight()
                         && taskCollection.isEmpty()) {
                     myScrollView.loadMoreImages();
@@ -151,7 +151,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
                 lastScrollY = scrollY;
                 Message message = new Message();
                 message.obj = myScrollView;
-                // 5╨ацК╨Сты╢н╤т╧Ж╤╞н╩жц╫Ьппеп╤о
+                // 5О©╫О©╫О©╫О©╫О©╫О©╫ы╢н╤т╧О©╫О©╫О©╫н╩О©╫ц╫О©╫О©╫О©╫О©╫п╤О©╫
                 handler.sendMessageDelayed(message, 5);
             }
         };
@@ -159,7 +159,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
     };
 
     /**
-     * MyScrollView╣д╧╧тЛ╨╞йЩ║ё
+     * MyScrollViewО©╫д╧О©╫О©╫Л╨╞О©╫О©╫
      *
      * @param context
      * @param attrs
@@ -200,7 +200,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
     }
 
     /**
-     * ╫Ьппр╩п╘╧ь╪Эпт╣дЁУй╪╩╞╡ывВё╛╩Ях║MyScrollView╣д╦ъ╤хё╛рт╪╟╣ц╣╫╣зр╩ап╣д©М╤хж╣║ё╡╒тзуБюО©╙й╪╪сть╣зр╩рЁ╣дм╪ф╛║ё
+     * О©╫О©╫О©╫О©╫р╩п╘О©╫ь╪О©╫О©╫т╣дЁО©╫й╪О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫х║MyScrollViewО©╫д╦ъ╤хёО©╫О©╫т╪О©╫О©╫ц╣О©╫О©╫О©╫р╩О©╫п╣д©О©╫О©╫ж╣О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╙й╪О©╫О©╫О©╫ь╣О©╫р╩рЁО©╫О©╫м╪ф╛О©╫О©╫
      */
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
@@ -218,7 +218,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
     }
 
     /**
-     * ╪ЮлЩсц╩╖╣д╢╔файб╪Чё╛хГ╧Шсц╩╖йжж╦юК©╙фад╩тР©╙й╪╫Ьпп╧Ж╤╞╪Л╡Б║ё
+     * О©╫О©╫О©╫О©╫О©╫ц╩О©╫О©╫д╢О©╫О©╫О©╫О©╫б╪О©╫О©╫О©╫О©╫О©╫О©╫О©╫ц╩О©╫О©╫О©╫ж╦О©╫К©╙О©╫О©╫д╩О©╫О©╫й╪О©╫О©╫О©╫п╧О©╫О©╫О©╫О©╫О©╫Б║ё
      */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -231,7 +231,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
     }
 
     /**
-     * ©╙й╪╪стьобр╩рЁ╣дм╪ф╛ё╛ц©уем╪ф╛╤╪╩А©╙фТр╩╦ЖрЛ╡╫оъЁлх╔обть║ё
+     * О©╫О©╫й╪О©╫О©╫О©╫О©╫О©╫О©╫р╩рЁО©╫О©╫м╪ф╛О©╫О©╫ц©О©╫О©╫м╪ф╛О©╫О©╫О©╫А©╙О©╫О©╫р╩О©╫О©╫О©╫Л╡╫О©╫ъЁО©╫х╔О©╫О©╫О©╫ь║О©╫
      */
     public void loadMoreImages() {
         ArrayList<String> imageUrls=new ArrayList<String>();
@@ -241,7 +241,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
             int startIndex = page * PAGE_SIZE;
             int endIndex = page * PAGE_SIZE + PAGE_SIZE;
             if (startIndex < imageUrls.size()) {
-                Toast.makeText(getContext(), "╪стьжп", Toast.LENGTH_SHORT)
+                Toast.makeText(getContext(), "Е╟▒Е╔ЁГ╔┬Г╔╥Д╦╜...", Toast.LENGTH_SHORT)
                         .show();
                 if (endIndex > imageUrls.size()) {
                     endIndex = imageUrls.size();
@@ -253,16 +253,16 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
                 }
                 page++;
             } else {
-                Toast.makeText(getContext(), "ц╩спак╟б", Toast.LENGTH_SHORT)
+                Toast.makeText(getContext(), "Ф╡║Ф°┴Д╨├Е╔╔", Toast.LENGTH_SHORT)
                         .show();
             }
         } else {
-            Toast.makeText(getContext(), "╟╔я╫ё╛SD©╗ур╡╩╣╫ак", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "ГЁ╩Г╩÷Ф╡║Ф°┴SDЕ█║О╪│", Toast.LENGTH_SHORT).show();
         }
     }
 
     /**
-     * ╠ИюЗimageViewListжп╣дц©уем╪ф╛ё╛╤тм╪ф╛╣д©и╪Шпт╫Ьпп╪Л╡Иё╛хГ╧Шм╪ф╛ря╬╜юК©╙фад╩©и╪Ш╥╤н╖ё╛тР╫╚м╪ф╛лФ╩╩Ёир╩уе©ум╪║ё
+     * О©╫О©╫О©╫О©╫imageViewListО©╫п╣О©╫ц©О©╫О©╫м╪ф╛О©╫О©╫О©╫О©╫м╪ф╛О©╫д©и╪О©╫О©╫т╫О©╫О©╫п╪О©╫Иё╛О©╫О©╫О©╫м╪ф╛О©╫я╬О©╫О©╫К©╙О©╫О©╫д╩О©╫и╪О©╫н╖О©╫О©╫О©╫О©╫м╪ф╛О©╫Ф╩╩О©╫О©╫р╩О©╫е©О©╫м╪О©╫О©╫
      */
     public void checkVisibility() {
         for (int i = 0; i < imageViewList.size(); i++) {
@@ -287,9 +287,9 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
     }
 
     /**
-     * еп╤ойж╩Зйг╥ЯспSD©╗║ё
+     * О©╫п╤О©╫О©╫ж╩О©╫О©╫г╥О©╫О©╫О©╫SDО©╫О©╫О©╫О©╫
      *
-     * @return спSD©╗╥╣╩ьtrueё╛ц╩сп╥╣╩ьfalse║ё
+     * @return О©╫О©╫SDО©╫О©╫О©╫О©╫О©╫О©╫trueО©╫О©╫ц╩О©╫п╥О©╫О©╫О©╫falseО©╫О©╫
      */
     private boolean hasSDCard() {
         return Environment.MEDIA_MOUNTED.equals(Environment
@@ -297,19 +297,19 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
     }
 
     /**
-     * рЛ╡╫обтьм╪ф╛╣дхннЯ║ё
+     * О©╫Л╡╫О©╫О©╫О©╫О©╫м╪ф╛О©╫О©╫О©╫О©╫О©╫О©╫
      *
      * @author guolin
      */
     class LoadImageTask extends AsyncTask<String, Void, Bitmap> {
 
         /**
-         * м╪ф╛╣дURL╣ьж╥
+         * м╪ф╛О©╫О©╫URLО©╫О©╫ж╥
          */
         private String mImageUrl;
 
         /**
-         * ©ижь╦╢й╧сц╣дImageView
+         * О©╫О©╫О©╫ь╦О©╫й╧О©╫ц╣О©╫ImageView
          */
         private ImageView mImageView;
 
@@ -317,7 +317,7 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
         }
 
         /**
-         * ╫╚©ижь╦╢й╧сц╣дImageView╢╚хК
+         * О©╫О©╫О©╫О©╫О©╫ь╦О©╫й╧О©╫ц╣О©╫ImageViewО©╫О©╫О©╫О©╫
          *
          * @param imageView
          */
@@ -347,11 +347,11 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
         }
 
         /**
-         * ╦Ы╬щ╢╚хК╣дURLё╛╤тм╪ф╛╫Ьпп╪сть║ёхГ╧ШуБуем╪ф╛ря╬╜╢ФтзсзSD©╗жпё╛тРж╠╫с╢сSD©╗юО╤ах║ё╛╥ЯтР╬м╢смЬбГиообть║ё
+         * О©╫О©╫щ╢О©╫О©╫О©╫О©╫URLО©╫О©╫О©╫О©╫м╪ф╛О©╫О©╫О©╫п╪О©╫О©╫ь║О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫м╪ф╛О©╫я╬О©╫О©╫О©╫О©╫О©╫О©╫О©╫SDО©╫О©╫О©╫пёО©╫О©╫О©╫ж╠О©╫с╢О©╫SDО©╫О©╫О©╫О©╫О©╫х║О©╫О©╫О©╫О©╫О©╫О©╫м╢О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ь║О©╫
          *
          * @param imageUrl
-         *            м╪ф╛╣дURL╣ьж╥
-         * @return ╪сть╣╫дз╢Ф╣дм╪ф╛║ё
+         *            м╪ф╛О©╫О©╫URLО©╫О©╫ж╥
+         * @return О©╫О©╫О©╫ь╣О©╫О©╫з╢О©╫О©╫м╪ф╛О©╫О©╫
          */
         private Bitmap loadImage(String imageUrl) {
             File imageFile = new File(getImagePath(imageUrl));
@@ -370,14 +370,14 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
         }
 
         /**
-         * оРImageViewжплМ╪ср╩уем╪ф╛
+         * О©╫О©╫ImageViewО©╫О©╫О©╫О©╫О©╫р╩О©╫О©╫м╪ф╛
          *
          * @param bitmap
-         *            ╢ЩлМ╪с╣дм╪ф╛
+         *            О©╫О©╫О©╫О©╫с╣О©╫м╪ф╛
          * @param imageWidth
-         *            м╪ф╛╣д©М╤х
+         *            м╪ф╛О©╫д©О©╫О©╫
          * @param imageHeight
-         *            м╪ф╛╣д╦ъ╤х
+         *            м╪ф╛О©╫д╦ъ╤О©╫
          */
         private void addImage(Bitmap bitmap, int imageWidth, int imageHeight) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -432,11 +432,11 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
         }
 
         /**
-         * ур╣╫╢кй╠с╕╦цлМ╪см╪ф╛╣др╩ап║ё╣╠г╟╦ъ╤хвНп║╣др╩ап╬мйгс╕╦цлМ╪с╣др╩ап║ё
+         * О©╫р╣О©╫О©╫О©╫й╠с╕О©╫О©╫О©╫О©╫О©╫м╪ф╛О©╫О©╫р╩О©╫п║О©╫О©╫О©╫г╟О©╫ъ╤О©╫О©╫О©╫п║О©╫О©╫р╩О©╫п╬О©╫О©╫О©╫с╕О©╫О©╫О©╫О©╫с╣О©╫р╩О©╫п║О©╫
          *
          * @param imageView
          * @param imageHeight
-         * @return с╕╦цлМ╪см╪ф╛╣др╩ап
+         * @return с╕О©╫О©╫О©╫О©╫О©╫м╪ф╛О©╫О©╫р╩О©╫О©╫
          */
         private LinearLayout findColumnToAdd(ImageView imageView,
                                              int imageHeight) {
@@ -455,10 +455,10 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
         }
 
         /**
-         * ╫╚м╪ф╛обть╣╫SD©╗╩╨╢ФфПю╢║ё
+         * О©╫О©╫м╪ф╛О©╫О©╫О©╫ь╣О©╫SDО©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
          *
          * @param imageUrl
-         *            м╪ф╛╣дURL╣ьж╥║ё
+         *            м╪ф╛О©╫О©╫URLО©╫О©╫ж╥О©╫О©╫
          */
         private void downloadImage(String imageUrl) {
             HttpURLConnection con = null;
@@ -510,11 +510,11 @@ public class MyScrollView extends ScrollView implements View.OnTouchListener {
         }
 
         /**
-         * ╩Ях║м╪ф╛╣д╠╬╣ь╢Ф╢╒б╥╬╤║ё
+         * О©╫О©╫х║м╪ф╛О©╫д╠О©╫О©╫ь╢Ф╢╒б╥О©╫О©╫О©╫О©╫
          *
          * @param imageUrl
-         *            м╪ф╛╣дURL╣ьж╥║ё
-         * @return м╪ф╛╣д╠╬╣ь╢Ф╢╒б╥╬╤║ё
+         *            м╪ф╛О©╫О©╫URLО©╫О©╫ж╥О©╫О©╫
+         * @return м╪ф╛О©╫д╠О©╫О©╫ь╢Ф╢╒б╥О©╫О©╫О©╫О©╫
          */
         private String getImagePath(String imageUrl) {
             int lastSlashIndex = imageUrl.lastIndexOf("/");

@@ -1,56 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
-    android:stretchColumns="1"
-    android:padding="10dp"
-    android:gravity="center"
-    tools:context=".LoginActivity">
-    <TableRow
-        android:padding="5dp" >
-        <TextView
-            android:text="@string/account_text"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="#000" />
-        <EditText
-            android:id="@+id/account"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:hint="手机号" />
-    </TableRow>
-    <TableRow
-        android:padding="5dp" >
-        <TextView
-            android:text="@string/password_text"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="#000" />
-        <EditText
-            android:id="@+id/password"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:textColor="#000"
-            android:hint="密码" />
-    </TableRow>
-    <TableRow
-        android:padding="5dp" >
-        <Button
-            android:id="@+id/login_button"
-            android:layout_height="wrap_content"
-            android:layout_span="2"
-            android:text="@string/login_text"/>
-    </TableRow>
+    android:orientation="vertical">
 
-    <TableRow
-        android:padding="5dp" >
-        <Button
-            android:id="@+id/register_button"
-            android:layout_height="wrap_content"
-            android:layout_span="2"
-            android:text="注　册"/>
-    </TableRow>
-</TableLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/user_title_text"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="登录看片宝"
+            android:background="#0080FF"
+            android:textColor="#fff"
+            android:textSize="24sp"/>
+    </LinearLayout>
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:stretchColumns="1"
+        android:padding="10dp"
+        android:gravity="center"
+        tools:context=".LoginActivity">
+        <TableRow
+            android:padding="5dp" >
+            <TextView
+                android:text="@string/account_text"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#000" />
+            <EditText
+                android:id="@+id/account"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:hint="手机号" />
+        </TableRow>
+        <TableRow
+            android:padding="5dp" >
+            <TextView
+                android:text="@string/password_text"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#000" />
+            <EditText
+                android:id="@+id/password"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="#000"
+                android:hint="密码" />
+        </TableRow>
+        <TableRow
+            android:padding="5dp" >
+            <Button
+                android:id="@+id/login_button"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:text="@string/login_text"/>
+        </TableRow>
+
+        <TableRow
+            android:padding="5dp" >
+            <Button
+                android:id="@+id/register_button"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:text="注　册"/>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

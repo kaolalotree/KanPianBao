@@ -26,6 +26,7 @@ import org.json.JSONArray;
 public class PersonFragment extends Fragment {
     private LinearLayout collectbtn;
     private LinearLayout orderbtn;
+    private LinearLayout logout_btn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,6 +50,15 @@ public class PersonFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        logout_btn = (LinearLayout) view.findViewById(R.id.logout_button);
+        logout_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //todo log out
+            }
+        });
+
         return view;
     }
 
