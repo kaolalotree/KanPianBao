@@ -58,7 +58,6 @@ public class PersonFragment extends Fragment {
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo log out
                 SharedPreferences sharedPreferences=getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor=sharedPreferences.edit();
                 editor.clear();
