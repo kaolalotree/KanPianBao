@@ -20,4 +20,5 @@ public class API {
     public final static String GET_COMMENTS_URL=DOMAIN+"/kpb/getComments";
     public final static String GIVE_COMMENT_URL=DOMAIN+"/kpb/giveComment";
     public final static String PAY_URL=DOMAIN+"/kpb/pay";
+    public final static String SEAT_CHOOSE_URL=DOMAIN+"/kpb/seatChoose";
 }

@@ -5,9 +5,12 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.Image;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -28,13 +31,16 @@ import com.android.volley.toolbox.Volley;
 import com.kpb.model.API;
 import com.kpb.model.Order;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class OrderDetailActivity extends Activity {
@@ -43,7 +49,7 @@ public class OrderDetailActivity extends Activity {
     private String[][] techList;
     private IntentFilter[] intentFilters;
     private PendingIntent pendingIntent;
-    private Tag tag;
+    private Tag tag=null;
     private  boolean hasNFC=false;
     public void initNFC(){
         mAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -66,10 +72,47 @@ public class OrderDetailActivity extends Activity {
         pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,
                 getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
     }
+    public String readMsg(NdefRecord record){
+        byte[] payload=record.getPayload();
+        Byte statusByte=payload[0];
+        String textEncoding="UTF-8";
+        int languageCodeLength=statusByte&0077;
+        String payloadStr="";
+        try {
+            payloadStr=new String(payload,languageCodeLength+1,payload.length-languageCodeLength-1,textEncoding);
+        } catch (UnsupportedEncodingException e) {
+            Log.e("ex", Log.getStackTraceString(e.getCause()));
+        }
+        return  payloadStr;
+    }
     public void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+        tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         Log.d("OrderStatus",currentOrder.getStatus());
+        Parcelable[] rawMsgs=intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+        NdefMessage[] msgs=null;
+        if(rawMsgs!=null){
+            msgs=new NdefMessage[rawMsgs.length];
+            for(int i=0;i<rawMsgs.length;i++){
+                msgs[i]=(NdefMessage)rawMsgs[i];
+            }
+        }
+        String s="";
+        if(msgs!=null){
+            for(int i=0;i<msgs.length;i++){
+                NdefRecord record=msgs[i].getRecords()[0];
+                s=s+readMsg(record);
+            }
+        }
+        Order order=JSON.parseObject(s,Order.class);
+        if(!currentOrder.getOrderId().equals(order.getOrderId())){
+            Toast.makeText(getApplicationContext(), "订单号不匹配！", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(!currentOrder.getToken().equals(order.getToken())){
+            Toast.makeText(getApplicationContext(), "Token非法！", Toast.LENGTH_LONG).show();
+            return;
+        }
         if(currentOrder.getStatus().equals("y"))
             Toast.makeText(getApplicationContext(), "该订单已经付过款了奥", Toast.LENGTH_LONG).show();
         else
@@ -141,9 +184,17 @@ public class OrderDetailActivity extends Activity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("TAG", response.toString());
-                        Order order= JSON.parseObject(response.toString(),Order.class);
-                        currentOrder=order;
-                        initView(order);
+
+                        try {
+                            JSONArray ja = response.getJSONArray("orders");
+                            List<Order> os=JSON.parseArray(ja.toString(),Order.class);
+                            Order order=os.get(0);
+                            currentOrder=order;
+                            initView(order);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 },
                 new Response.ErrorListener(){
