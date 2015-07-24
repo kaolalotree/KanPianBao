@@ -4,7 +4,7 @@ package com.kpb.model;
  * Created by Student on 2015/7/20.
  */
 public class API {
-    public final static String DOMAIN="http://10.180.30.110:8080";
+    public final static String DOMAIN="http://10.214.11.49:8080";
     public final static String LOGIN_URL=DOMAIN+"/kpb/login";
     public final static String REGISTER_URL=DOMAIN+"/kpb/register";
     public final static String GET_RECOMMENDMOVIES_URL=DOMAIN+"/kpb/getRecommendMovies";
